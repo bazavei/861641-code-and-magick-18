@@ -6,11 +6,11 @@ var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var BAR_HEIGHT = 150;
 var BAR_WIDTH = 40;
-var START_NAME_X = 110;
+var startNameX = 110;
 var START_NAME_Y = 260;
 var START_BAR_X = 110;
 var START_BAR_Y = 90;
-var START_TIME_X = 110;
+var startTimeX = 110;
 var START_TIME_Y = 80;
 var BARS_GAP = 90;
 var GAP = 10;
@@ -52,10 +52,10 @@ window.renderStatistics = function (ctx, players, times) {
   for (var i = 0; i < times.length; i++) {
     var newStart = BAR_HEIGHT - (BAR_HEIGHT * times[i] / maxTime);
     ctx.fillStyle = '#000';
-    ctx.fillText(players[i], START_NAME_X, START_NAME_Y);
-    START_NAME_X += BARS_GAP;
-    ctx.fillText(Math.round(times[i]), START_TIME_X, START_TIME_Y + newStart);
-    START_TIME_X += BARS_GAP;
+    ctx.fillText(players[i], startNameX, START_NAME_Y);
+    startNameX += BARS_GAP;
+    ctx.fillText(Math.round(times[i]), startTimeX, START_TIME_Y + newStart);
+    startTimeX += BARS_GAP;
     ctx.fillStyle = (players[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : 'hsl(240, 100%, ' + getRandomSaturate(0, 100) + '%)';
 
     ctx.fillRect(START_BAR_X, START_BAR_Y + newStart, BAR_WIDTH, BAR_HEIGHT * times[i] / maxTime);
