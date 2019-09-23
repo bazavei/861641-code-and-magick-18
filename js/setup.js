@@ -1,9 +1,5 @@
 'use strict';
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
-document.querySelector('.setup-similar').classList.remove('hidden');
-
 var NAMES = [
   'Иван',
   'Хуан Себастьян',
@@ -26,12 +22,12 @@ var SURNAMES = [
 ];
 
 var COATS_COLOR = [
-  'rgb (101, 137, 164)',
-  'rgb (241, 43, 107)',
-  'rgb (146, 100, 161)',
-  'rgb (56, 159, 117)',
-  'rgb (215, 210, 55)',
-  'rgb (0, 0, 0)'
+  'rgb(101, 137, 164)',
+  'rgb(241, 43, 107)',
+  'rgb(146, 100, 161)',
+  'rgb(56, 159, 117)',
+  'rgb(215, 210, 55)',
+  'rgb(0, 0, 0)'
 ];
 
 var EYAES_COLOR = [
@@ -44,21 +40,30 @@ var EYAES_COLOR = [
 
 var COUNT = 4;
 
+var userDialog = document.querySelector('.setup');
+userDialog.classList.remove('hidden');
+document.querySelector('.setup-similar').classList.remove('hidden');
+
+
 var getRandomValue = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   return arr[rand];
 };
 
+var getWizardsArr = function (array) {
+  for (var i = 0; i < COUNT; i++) {
+    array.push(
+        {
+          name: getRandomValue(NAMES) + ' ' + getRandomValue(SURNAMES),
+          coatColor: getRandomValue(COATS_COLOR),
+          eyesColor: getRandomValue(EYAES_COLOR)
+        }
+    );
+  }
+};
+
 var wizards = [];
-for (var i = 0; i < COUNT; i++) {
-  wizards.push(
-      {
-        name: getRandomValue(NAMES) + ' ' + getRandomValue(SURNAMES),
-        coatColor: getRandomValue(COATS_COLOR),
-        eyesColor: getRandomValue(EYAES_COLOR)
-      }
-  );
-}
+getWizardsArr(wizards);
 
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -75,10 +80,14 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-var fragment = document.createDocumentFragment();
-for (var j = 0; j < wizards.length; j++) {
-  fragment.appendChild(renderWizard(wizards[j]));
-}
-similarListElement.appendChild(fragment);
+var renderWizards = function (array) {
+  var fragment = document.createDocumentFragment();
+  for (var j = 0; j < array.length; j++) {
+    fragment.appendChild(renderWizard(array[j]));
+  }
+  similarListElement.appendChild(fragment);
+};
+
+renderWizards(wizards);
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
