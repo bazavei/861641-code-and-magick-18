@@ -40,19 +40,15 @@ var EYAES_COLOR = [
 
 var COUNT = 4;
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
-document.querySelector('.setup-similar').classList.remove('hidden');
-
-
 var getRandomValue = function (arr) {
   var rand = Math.floor(Math.random() * arr.length);
   return arr[rand];
 };
 
-var getWizardsArr = function (array) {
-  for (var i = 0; i < COUNT; i++) {
-    array.push(
+var getWizardsArr = function (count) {
+  var data = [];
+  for (var i = 0; i < count; i++) {
+    data.push(
         {
           name: getRandomValue(NAMES) + ' ' + getRandomValue(SURNAMES),
           coatColor: getRandomValue(COATS_COLOR),
@@ -60,10 +56,9 @@ var getWizardsArr = function (array) {
         }
     );
   }
+  return data;
 };
 
-var wizards = [];
-getWizardsArr(wizards);
 
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
@@ -88,6 +83,8 @@ var renderWizards = function (array) {
   similarListElement.appendChild(fragment);
 };
 
+var wizards = getWizardsArr(COUNT);
 renderWizards(wizards);
-
+var userDialog = document.querySelector('.setup');
+userDialog.classList.remove('hidden');
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
