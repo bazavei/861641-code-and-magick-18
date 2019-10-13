@@ -28,10 +28,12 @@
 
   setupOpen.addEventListener('click', function () {
     openPopup();
+    window.backend.load(window.setup.onLoad, window.setup.onError);
   });
 
   setupOpen.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, openPopup);
+    window.backend.load(window.setup.onLoad, window.setup.onError);
   });
 
   setupClose.addEventListener('click', function () {

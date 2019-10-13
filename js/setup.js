@@ -49,8 +49,8 @@
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
 
     return wizardElement;
   };
@@ -98,7 +98,12 @@
     evt.preventDefault();
   });
 
-  window.backend.load(onLoad, onError);
+  // window.backend.load(onLoad, onError);
+
+  window.setup = {
+    onError: onError,
+    onLoad: onLoad
+  };
 })();
 
 
