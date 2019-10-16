@@ -16,6 +16,7 @@
   var openPopup = function () {
     setup.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
+    window.backend.load(window.setup.onLoad, window.setup.onError);
   };
 
   usernameInput.addEventListener('focus', function () {
