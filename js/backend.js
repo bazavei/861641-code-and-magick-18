@@ -4,7 +4,7 @@
   var URL_LOAD = 'https://js.dump.academy/code-and-magick/data';
   var URL_SAVE = 'https://js.dump.academy/code-and-magick';
 
-  var createXHR = function (data, method, url, onLoad, onError) {
+  var createXHR = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
@@ -24,16 +24,19 @@
     });
 
     xhr.timeout = 10000;
-    xhr.open(method, url);
-    xhr.send(data);
+    return xhr;
   };
 
   var load = function (onLoad, onError) {
-    createXHR(null, 'GET', URL_LOAD, onLoad, onError);
+    var xhr = createXHR(onLoad, onError);
+    xhr.open('GET', URL_LOAD);
+    xhr.send();
   };
 
   var save = function (data, onLoad, onError) {
-    createXHR(data, 'POST', URL_SAVE, onLoad, onError);
+    var xhr = createXHR(onLoad, onError);
+    xhr.open('POST', URL_SAVE);
+    xhr.send(data);
   };
 
   window.backend = {
